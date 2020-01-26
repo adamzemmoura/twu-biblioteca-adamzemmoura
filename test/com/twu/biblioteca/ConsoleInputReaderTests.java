@@ -46,4 +46,10 @@ public class ConsoleInputReaderTests {
         assertThat(input3, is(100));
     }
 
+    @Test (expected = InvalidInputException.class)
+    public void attemptingToReadIntFromConsoleThrowsWhenNonInt() throws Exception {
+        when(bufferedReaderMock.readLine()).thenReturn("word");
+        int input1 = consoleInputReader.attemptToReadInt();
+    }
+
 }

@@ -22,8 +22,14 @@ public class ConsoleInputReader {
         return bufferedReader.readLine();
     }
 
-    public int attemptToReadInt() throws IOException, NumberFormatException {
-        String inputString = bufferedReader.readLine();
-        return Integer.parseInt(inputString);
+    public int attemptToReadInt() throws InvalidInputException {
+        try {
+            String inputString = bufferedReader.readLine();
+            return Integer.parseInt(inputString);
+        } catch (IOException ioe) {
+            throw new InvalidInputException(ioe.getMessage());
+        } catch (NumberFormatException nfe) {
+            throw new InvalidInputException(nfe.getMessage());
+        }
     }
 }
