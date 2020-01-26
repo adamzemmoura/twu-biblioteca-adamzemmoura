@@ -18,7 +18,12 @@ public class ConsoleInputReader {
         this.bufferedReader = bufferedReader;
     }
 
-    public String attemptToGetStringInput() throws IOException {
+    public String attemptToReadString() throws IOException {
         return bufferedReader.readLine();
+    }
+
+    public int attemptToReadInt() throws IOException, NumberFormatException {
+        String inputString = bufferedReader.readLine();
+        return Integer.parseInt(inputString);
     }
 }
