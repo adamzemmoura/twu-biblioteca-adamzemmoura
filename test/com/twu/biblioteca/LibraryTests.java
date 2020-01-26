@@ -50,4 +50,9 @@ public class LibraryTests {
         assertThat(firstCheckoutAttempt, is(true));
         assertThat(secondCheckoutAttempt, is(false));
     }
+
+    @Test (expected = ItemNotFoundException.class)
+    public void attemptingToCheckOutBookWithUnknownTitleThrows() throws Exception {
+        library.attemptToCheckOutBookByTitle("this book does not exist");
+    }
 }
