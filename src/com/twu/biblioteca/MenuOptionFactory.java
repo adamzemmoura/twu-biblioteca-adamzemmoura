@@ -16,9 +16,16 @@ public class MenuOptionFactory {
             printer.printList(booksAsStrings);
         };
 
-        MenuOption option = new MenuOption(Strings.MENU_OPTION_SHOW_ALL_BOOKS, action);
+        MenuOption option = new MenuOption(Strings.MENU_OPTION_TITLE_SHOW_ALL_BOOKS, action);
 
         return option;
     }
 
+    public static MenuOption createQuitOption() {
+        Selectable action = () -> {
+            printer.printMessage(Strings.FAREWELL_MESSAGE);
+            System.exit(0);
+        };
+        return new MenuOption(Strings.MENU_OPTION_TITLE_QUIT, action);
+    }
 }

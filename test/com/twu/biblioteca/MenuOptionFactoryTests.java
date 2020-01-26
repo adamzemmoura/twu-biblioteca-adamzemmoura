@@ -1,6 +1,8 @@
 package com.twu.biblioteca;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import java.io.PrintStream;
 import java.util.Arrays;
@@ -10,6 +12,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class MenuOptionFactoryTests {
+
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     @Test
     public void canCreateShowAllBooksMenuOption() {
@@ -21,6 +26,13 @@ public class MenuOptionFactoryTests {
         showAllBooks.select();
 
         verify(printStreamMock).println(generateExpectedBookListOutput());
+    }
+
+    @Test
+    public void canCreateQuitOption() {
+        MenuOption quitOption = MenuOptionFactory.createQuitOption();
+        exit.expectSystemExit();
+        quitOption.select();
     }
 
     private List<Book> testBooks = Arrays.asList(

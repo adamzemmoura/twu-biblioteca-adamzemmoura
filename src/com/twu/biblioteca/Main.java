@@ -12,7 +12,8 @@ public class Main {
 
     private static Menu createMenu() {
         List<MenuOption> menuOptions = Arrays.asList(
-                MenuOptionFactory.createShowAllBooksMenuOption()
+                MenuOptionFactory.createShowAllBooksMenuOption(),
+                MenuOptionFactory.createQuitOption()
         );
         return new Menu(menuOptions);
     }
