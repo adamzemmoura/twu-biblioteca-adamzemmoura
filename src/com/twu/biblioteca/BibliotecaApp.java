@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 public class BibliotecaApp {
 
     private Printer printer = Printer.sharedInstance;
-    private Library library = Library.sharedInstance;
     private List<MenuOption> menuOptions;
 
     public BibliotecaApp() {
@@ -23,6 +22,7 @@ public class BibliotecaApp {
     public void start() {
         displayWelcomeMessage();
         displayMenu();
+
     }
 
     private void displayMenu() {
