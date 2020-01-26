@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class LibraryTests {
 
@@ -23,9 +23,9 @@ public class LibraryTests {
     }
 
     @Test
-    public void libraryReturnsEmptyListWhenNoBooks() {
+    public void libraryReturnsListOfBooksWhenThereAreBooks() {
         List<Book> books = library.getAllBooks();
-        assertThat(books.size(), is(0));
+        assertTrue("There is one or more books", books.size() > 0);
     }
 
 }
