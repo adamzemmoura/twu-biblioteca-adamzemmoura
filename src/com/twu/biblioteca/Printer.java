@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.List;
 
 public class Printer {
 
@@ -17,5 +18,12 @@ public class Printer {
 
     public void printMessage(String message) {
         printStream.println(message);
+    }
+
+    public void printList(List<String> items) {
+        StringBuilder sb = new StringBuilder();
+        String format = "\t%s\n";
+        items.stream().forEach(item -> sb.append( String.format(format, item)));
+        printStream.println(sb.toString());
     }
 }
