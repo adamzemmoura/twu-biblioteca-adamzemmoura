@@ -26,4 +26,5 @@ public class Strings {
     public static final String SUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Thank you! Enjoy the book";
     public static final String UNSUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Sorry, that book is not available";
     public static final String SUCCESSFUL_BOOK_CHECKIN_MESSAGE = "Thank you for returning the book";
+    public static final String UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE = "This is not a valid book to return";
 }

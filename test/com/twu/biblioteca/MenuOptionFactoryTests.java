@@ -125,6 +125,18 @@ public class MenuOptionFactoryTests {
         verify(printStreamMock).println(Strings.SUCCESSFUL_BOOK_CHECKIN_MESSAGE);
     }
 
+    @Test
+    public void messageDisplayedOnUnsuccessfulCheckinOfBook() throws Exception {
+        MenuOption checkinBookByTitleOption = MenuOptionFactory.createCheckinBookByTitleOption();
+        String bookTitle = "This book is not in the library";
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        printer.setPrintStream(printStreamMock);
+
+        checkinBookByTitleOption.select();
+
+        verify(printStreamMock).println(Strings.UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE);
+    }
+
     private List<Book> testBooks = Arrays.asList(
             new Book("Clean Code", "Robert C. Martin", "1999"),
             new Book("Clean Coder", "Robert C. Martin", "1999"),

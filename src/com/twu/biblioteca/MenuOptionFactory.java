@@ -54,6 +54,8 @@ public class MenuOptionFactory {
                 String bookTitle = inputReader.attemptToReadString(Strings.MENU_OPTION_CHECKIN_BOOK_PROMPT);
                 boolean succesfullyCheckedIn = library.attemptToCheckinBookByTitle(bookTitle);
                 if (succesfullyCheckedIn) printer.printMessage(Strings.SUCCESSFUL_BOOK_CHECKIN_MESSAGE);
+            } catch (ItemNotFoundException infe) {
+                printer.printMessage(Strings.UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE);
             } catch (Exception e) {
                 printer.printMessage(e.getMessage());
             }
