@@ -55,4 +55,10 @@ public class LibraryTests {
     public void attemptingToCheckOutBookWithUnknownTitleThrows() throws Exception {
         library.attemptToCheckOutBookByTitle("this book does not exist");
     }
+
+    @Test
+    public void attemptingToCheckoutBookWithCorrectTitleIgnoringCaseSucceeds() throws Exception {
+        boolean result = library.attemptToCheckOutBookByTitle("cLeaN CodE");
+        assertThat(result, is(true));
+    }
 }
