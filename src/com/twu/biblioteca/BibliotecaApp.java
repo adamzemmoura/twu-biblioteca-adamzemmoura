@@ -26,13 +26,15 @@ public class BibliotecaApp {
     }
 
     private void displayMenu() {
-
+        printer.printMessage(Strings.MENU_HEADER);
+        List<String> menuOptionTitles = getMenuOptionTitles();
+        printer.printNumberList(menuOptionTitles);
     }
 
-    private void displayAllBooks() {
-        printer.printMessage(Strings.BOOK_LIST_HEADER);
-        List<String> printableBooks = library.getAllBooks().stream().map(Book::toString).collect(Collectors.toList());
-        printer.printList(printableBooks);
+    private List<String> getMenuOptionTitles() {
+        return menuOptions.stream()
+                .map(menuOption -> menuOption.getTitle() )
+                .collect(Collectors.toList());
     }
 
     private void displayWelcomeMessage() {

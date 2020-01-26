@@ -13,4 +13,8 @@ public class MenuOption {
     public void select() {
         action.select();
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
