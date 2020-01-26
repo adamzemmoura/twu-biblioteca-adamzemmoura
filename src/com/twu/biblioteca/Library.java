@@ -36,19 +36,26 @@ public class Library {
     }
 
     public AvailabilityStatus checkAvailabilityOfBookWithTitle(String title) throws ItemNotFoundException {
-        Book book = tryToGetFirstBookMatchingTitle(title);
+        Book book = attemptToGetFirstBookMatchingTitle(title);
         return availabilityStatusHashMap.get(book.getId());
     }
 
 
 
-    public void checkOutBookByTitle(String title) throws ItemNotFoundException {
-        Book selectedBook = tryToGetFirstBookMatchingTitle(title);
+    public boolean attemptToCheckOutBookByTitle(String title) throws ItemNotFoundException {
+        Book selectedBook = attemptToGetFirstBookMatchingTitle(title);
         UUID id = selectedBook.getId();
+        if ( bookIsNotAvailable(id) ) return false;
         availabilityStatusHashMap.put(id, AvailabilityStatus.UNAVAILABLE);
+        return true;
     }
 
-    private Book tryToGetFirstBookMatchingTitle(String title) throws ItemNotFoundException {
+    private boolean bookIsNotAvailable(UUID id) {
+        AvailabilityStatus status = availabilityStatusHashMap.get(id);
+        return status == AvailabilityStatus.UNAVAILABLE;
+    }
+
+    private Book attemptToGetFirstBookMatchingTitle(String title) throws ItemNotFoundException {
         return allBooks.stream()
                     .filter(book -> book.getTitle().equalsIgnoreCase(title))
                     .findFirst()

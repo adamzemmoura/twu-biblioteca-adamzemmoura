@@ -35,10 +35,19 @@ public class LibraryTests {
     public void canCheckOutBookThatIsAvailable() throws Exception {
         AvailabilityStatus statusBeforeCheckout = library.checkAvailabilityOfBookWithTitle("Clean Code");
 
-        library.checkOutBookByTitle("Clean Code");
+        library.attemptToCheckOutBookByTitle("Clean Code");
         AvailabilityStatus statusAfterCheckout = library.checkAvailabilityOfBookWithTitle("Clean Code");
 
         assertThat(statusBeforeCheckout, is(AvailabilityStatus.AVAILABLE));
         assertThat(statusAfterCheckout, is(AvailabilityStatus.UNAVAILABLE));
+    }
+
+    @Test
+    public void cannotCheckoutBookThatIsUnavailable() throws Exception {
+        boolean firstCheckoutAttempt = library.attemptToCheckOutBookByTitle("Clean Code");
+        boolean secondCheckoutAttempt = library.attemptToCheckOutBookByTitle("Clean Code");
+
+        assertThat(firstCheckoutAttempt, is(true));
+        assertThat(secondCheckoutAttempt, is(false));
     }
 }
