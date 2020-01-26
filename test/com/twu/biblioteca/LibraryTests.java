@@ -61,6 +61,17 @@ public class LibraryTests {
         assertThat(secondCheckoutAttempt, is(false));
     }
 
+    @Test
+    public void canCheckABookBackInIfTheBookBelongsToTheLibrary() throws Exception {
+        String title = "Clean Code";
+        boolean checkoutAttempt = library.attemptToCheckOutBookByTitle(title);
+
+        boolean checkinAttempt = library.attemptToCheckinBookByTitle(title);
+
+        assertThat(checkoutAttempt, is(true));
+        assertThat(checkinAttempt, is(true));
+    }
+
     @Test (expected = ItemNotFoundException.class)
     public void attemptingToCheckOutBookWithUnknownTitleThrows() throws Exception {
         library.attemptToCheckOutBookByTitle("this book does not exist");

@@ -75,4 +75,10 @@ public class Library {
                 .filter(this::bookIsAvailable)
                 .collect(Collectors.toList());
     }
+
+    public boolean attemptToCheckinBookByTitle(String title) throws ItemNotFoundException {
+        Book book = attemptToGetFirstBookMatchingTitle(title);
+        availabilityStatusHashMap.put(book.getId(), AvailabilityStatus.AVAILABLE);
+        return bookIsAvailable(book);
+    }
 }
