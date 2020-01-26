@@ -79,8 +79,6 @@ public class LibraryTests {
         library.attemptToCheckinBookByTitle(title);
     }
 
-
-
     @Test (expected = ItemNotFoundException.class)
     public void attemptingToCheckOutBookWithUnknownTitleThrows() throws Exception {
         library.attemptToCheckOutBookByTitle("this book does not exist");

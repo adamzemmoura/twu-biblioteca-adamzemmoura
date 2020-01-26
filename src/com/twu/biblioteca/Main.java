@@ -14,6 +14,7 @@ public class Main {
         List<MenuOption> menuOptions = Arrays.asList(
                 MenuOptionFactory.createShowAllBooksMenuOption(),
                 MenuOptionFactory.createCheckoutBookByTitleOption(),
+                MenuOptionFactory.createCheckinBookByTitleOption(),
                 MenuOptionFactory.createQuitOption()
         );
         return new Menu(menuOptions);

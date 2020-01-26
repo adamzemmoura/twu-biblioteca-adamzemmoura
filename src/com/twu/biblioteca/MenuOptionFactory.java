@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,5 +46,17 @@ public class MenuOptionFactory {
             }
         };
         return new MenuOption(Strings.MENU_OPTION_TITLE_CHECKOUT_BOOK, action);
+    }
+
+    public static MenuOption createCheckinBookByTitleOption() {
+        Selectable action = () -> {
+            try {
+                String bookTitle = inputReader.attemptToReadString(Strings.MENU_OPTION_CHECKIN_BOOK_PROMPT);
+                boolean succesfullyCheckedIn = library.attemptToCheckinBookByTitle(bookTitle);
+            } catch (Exception e) {
+                printer.printMessage(e.getMessage());
+            }
+        };
+        return new MenuOption(Strings.MENU_OPTION_TITLE_CHECKIN_BOOK, action);
     }
 }
