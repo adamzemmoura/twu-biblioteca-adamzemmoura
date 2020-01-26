@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 import static org.hamcrest.CoreMatchers.is;
@@ -60,5 +61,17 @@ public class LibraryTests {
     public void attemptingToCheckoutBookWithCorrectTitleIgnoringCaseSucceeds() throws Exception {
         boolean result = library.attemptToCheckOutBookByTitle("cLeaN CodE");
         assertThat(result, is(true));
+    }
+
+    @Test
+    public void checkedOutBooksNotIncludedInResultsFromCallToGetAllAvailableBooks() throws Exception {
+        boolean _ = library.attemptToCheckOutBookByTitle("Clean Code");
+
+        boolean checkedOutBookIncluded = library.getAvailableBooks().stream()
+                .filter(book -> book.getTitle().contains("Clean Code"))
+                .collect(Collectors.toList())
+                .isEmpty();
+
+        assertThat(checkedOutBookIncluded, is(false));
     }
 }
