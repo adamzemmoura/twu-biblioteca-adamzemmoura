@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,13 +25,18 @@ public class MenuOptionFactoryTests {
 
     @Before
     public void setUp() {
-        PrintStream printStreamMock = mock(PrintStream.class);
+        printStreamMock = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         printer = Printer.sharedInstance;
         printer.setPrintStream(printStreamMock);
         inputReader = ConsoleInputReader.sharedInstance;
         inputReader.setBufferedReader(bufferedReader);
         library = Library.sharedInstance;
+    }
+
+    @After
+    public void tearDown() {
+        library.setAllBooksToAvailable();
     }
 
     @Rule
@@ -62,6 +68,17 @@ public class MenuOptionFactoryTests {
 
         assertThat(statusBeforeOptionSelected, is(AvailabilityStatus.AVAILABLE));
         assertThat(statusAfterOptionSelected, is(AvailabilityStatus.UNAVAILABLE));
+    }
+
+    @Test
+    public void successMessageDisplayedOnSuccessfulCheckoutOfBook() throws Exception {
+        MenuOption checkoutBookByTitleOption = MenuOptionFactory.createCheckoutBookByTitleOption();
+        when(bufferedReader.readLine()).thenReturn("Clean Code");
+        printer.setPrintStream(printStreamMock);
+
+        checkoutBookByTitleOption.select();
+
+        verify(printStreamMock).println(Strings.SUCCESSFUL_BOOK_CHECKOUT_MESSAGE);
     }
 
     private List<Book> testBooks = Arrays.asList(

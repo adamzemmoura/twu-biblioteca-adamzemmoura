@@ -35,7 +35,8 @@ public class MenuOptionFactory {
         Selectable action = () -> {
             try {
                 String bookTitle = inputReader.attemptToReadString(Strings.MENU_OPTION_CHECKOUT_BOOK_PROMPT);
-                library.attemptToCheckOutBookByTitle(bookTitle);
+                boolean successfullyCheckedOut = library.attemptToCheckOutBookByTitle(bookTitle);
+                if (successfullyCheckedOut) printer.printMessage(Strings.SUCCESSFUL_BOOK_CHECKOUT_MESSAGE);
             } catch (Exception e) {
                 printer.printMessage(e.getMessage());
             }

@@ -1,8 +1,10 @@
 package com.twu.biblioteca;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class LibraryTests {
 
@@ -19,6 +23,11 @@ public class LibraryTests {
     @Before
     public void setUp() {
         library = Library.sharedInstance;
+    }
+
+    @After
+    public void tearDown() {
+        library.setAllBooksToAvailable();
     }
 
     @Test

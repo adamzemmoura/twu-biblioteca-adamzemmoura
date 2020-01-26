@@ -19,7 +19,7 @@ public class Library {
         setAllBooksToAvailable();
     }
 
-    private void setAllBooksToAvailable() {
+    public void setAllBooksToAvailable() {
         availabilityStatusHashMap = new HashMap<>();
         allBooks.forEach(book -> {
             UUID id = book.getId();
