@@ -1,11 +1,14 @@
 package com.twu.biblioteca;
 
+import java.util.UUID;
+
 public class Book {
 
 
     private final String author;
     private final String title;
     private final String yearPublished;
+    private final UUID id = UUID.randomUUID();
 
     public Book(String title, String author, String yearPublished) {
         this.title = title;
@@ -29,5 +32,9 @@ public class Book {
     public String toString() {
         String format = "\"%s\" by %s (%s)";
         return String.format(format, title, author, yearPublished);
+    }
+
+    public UUID getId() {
+        return this.id;
     }
 }
