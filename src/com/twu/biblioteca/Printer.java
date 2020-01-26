@@ -7,6 +7,7 @@ public class Printer {
 
     public static Printer sharedInstance = new Printer();
     private PrintStream printStream;
+    private StringBuilder stringBuilder;
 
     private Printer() {
         printStream = System.out;
@@ -21,9 +22,25 @@ public class Printer {
     }
 
     public void printList(List<String> items) {
-        StringBuilder sb = new StringBuilder();
+        stringBuilder = new StringBuilder();
         String format = "\t%s\n";
-        items.stream().forEach(item -> sb.append( String.format(format, item)));
-        printStream.println(sb.toString());
+        items.stream().forEach(item -> stringBuilder.append( String.format(format, item)));
+        printStream.println(stringBuilder.toString());
+    }
+
+    public void printNumberList(List<String> items) {
+        stringBuilder = new StringBuilder();
+        String format = "\t%d. %s\n";
+
+        for (int i = 0; i < items.size(); i++) {
+            String item = items.get(i);
+            int numberForDisplay = i + 1;
+            stringBuilder.append(String.format(format, numberForDisplay, item));
+
+        }
+
+        printMessage(stringBuilder.toString());
+
+
     }
 }

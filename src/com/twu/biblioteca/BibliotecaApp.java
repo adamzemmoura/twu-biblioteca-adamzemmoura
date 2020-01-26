@@ -23,8 +23,6 @@ public class BibliotecaApp {
     public void start() {
         displayWelcomeMessage();
         displayMenu();
-
-
     }
 
     private void displayMenu() {

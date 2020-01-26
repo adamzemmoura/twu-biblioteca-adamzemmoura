@@ -44,4 +44,17 @@ public class PrinterTests {
         verify(printStream).println(expectedOutput);
     }
 
+    @Test
+    public void printerCorrectlyPrintsNumberedListOfStrings() {
+        String item1 = "item1";
+        String item2 = "item2";
+        String item3 = "item3";
+        List<String> items = Arrays.asList(item1, item2, item3);
+        String expectedOutput = String.format("\t1. %s\n\t2. %s\n\t3. %s\n", item1, item2, item3);
+
+        printer.printNumberList(items);
+
+        verify(printStream).println(expectedOutput);
+    }
+
 }
