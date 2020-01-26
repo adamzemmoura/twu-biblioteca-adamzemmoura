@@ -13,4 +13,5 @@ public class Strings {
     public static final String MENU_OPTION_CHECKOUT_BOOK_PROMPT = "Please enter the title of the book you would like to checkout : ";
     public static final String FAREWELL_MESSAGE = "Thanks for using Biblioteca! 👋😄";
     public static final String SUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Thank you! Enjoy the book";
+    public static final String UNSUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Sorry, that book is not available";
 }

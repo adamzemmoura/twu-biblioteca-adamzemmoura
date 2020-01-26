@@ -81,6 +81,20 @@ public class MenuOptionFactoryTests {
         verify(printStreamMock).println(Strings.SUCCESSFUL_BOOK_CHECKOUT_MESSAGE);
     }
 
+    @Test
+    public void messageDisplayedOnUnsuccessfulCheckoutOfBook() throws Exception {
+        String bookTitle = "Clean Code";
+        MenuOption checkoutBookByTitleOption = MenuOptionFactory.createCheckoutBookByTitleOption();
+        boolean successfullyCheckedOut = library.attemptToCheckOutBookByTitle(bookTitle);
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        printer.setPrintStream(printStreamMock);
+
+        checkoutBookByTitleOption.select();
+
+        assertThat(successfullyCheckedOut, is(true));
+        verify(printStreamMock).println(Strings.UNSUCCESSFUL_BOOK_CHECKOUT_MESSAGE);
+    }
+
     private List<Book> testBooks = Arrays.asList(
             new Book("Clean Code", "Robert C. Martin", "1999"),
             new Book("Clean Coder", "Robert C. Martin", "1999"),
