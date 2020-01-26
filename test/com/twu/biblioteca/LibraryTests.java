@@ -73,6 +73,15 @@ public class LibraryTests {
     }
 
     @Test (expected = ItemNotFoundException.class)
+    public void cannotCheckABookBackInIfItDoesNotBelongsToTheLibrary() throws Exception {
+        String title = "This book is not in the library";
+
+        library.attemptToCheckinBookByTitle(title);
+    }
+
+
+
+    @Test (expected = ItemNotFoundException.class)
     public void attemptingToCheckOutBookWithUnknownTitleThrows() throws Exception {
         library.attemptToCheckOutBookByTitle("this book does not exist");
     }
