@@ -18,18 +18,18 @@ public class ConsoleInputReader {
         this.bufferedReader = bufferedReader;
     }
 
-    public String attemptToReadString() throws IOException {
+    public String attemptToReadString(String prompt) throws IOException {
+        Printer.sharedInstance.printMessage(prompt);
         return bufferedReader.readLine();
     }
 
-    public int attemptToReadInt() throws InvalidInputException {
+    public int attemptToReadInt(String prompt) throws InvalidInputException {
+        Printer.sharedInstance.printMessage(prompt);
         try {
             String inputString = bufferedReader.readLine();
             return Integer.parseInt(inputString);
-        } catch (IOException ioe) {
-            throw new InvalidInputException(ioe.getMessage());
-        } catch (NumberFormatException nfe) {
-            throw new InvalidInputException(nfe.getMessage());
-        }
+        } catch (Exception e) {
+            throw new InvalidInputException(e.getLocalizedMessage());
+        } 
     }
 }

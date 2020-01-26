@@ -22,7 +22,22 @@ public class BibliotecaApp {
     public void start() {
         displayWelcomeMessage();
         displayMenu();
+        handleUserSelection();
+    }
 
+    private void handleUserSelection() {
+        try {
+            tryToMakeSelectionFromUserInput();
+        } catch (InvalidInputException iie) {
+            printer.printMessage(Strings.ERROR_MESSAGE_INVALID_SELECTION);
+        }
+    }
+
+    private void tryToMakeSelectionFromUserInput() throws InvalidInputException {
+        int userInput = ConsoleInputReader.sharedInstance.attemptToReadInt(Strings.MENU_SELECTION_PROMPT);
+        int index = userInput - 1;
+        MenuOption selectedOption = menuOptions.get(index);
+        selectedOption.select();
     }
 
     private void displayMenu() {
