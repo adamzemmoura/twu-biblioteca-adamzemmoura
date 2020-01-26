@@ -111,6 +111,20 @@ public class MenuOptionFactoryTests {
         assertThat(statusAfterOptionSelected, is(AvailabilityStatus.AVAILABLE));
     }
 
+    @Test
+    public void messageDisplayedOnSuccessfulCheckinOfBook() throws Exception {
+        String bookTitle = "Clean Code";
+        MenuOption checkinBookByTitleOption = MenuOptionFactory.createCheckinBookByTitleOption();
+        boolean successfullyCheckedOut = library.attemptToCheckOutBookByTitle(bookTitle);
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        printer.setPrintStream(printStreamMock);
+
+        checkinBookByTitleOption.select();
+
+        assertThat(successfullyCheckedOut, is(true));
+        verify(printStreamMock).println(Strings.SUCCESSFUL_BOOK_CHECKIN_MESSAGE);
+    }
+
     private List<Book> testBooks = Arrays.asList(
             new Book("Clean Code", "Robert C. Martin", "1999"),
             new Book("Clean Coder", "Robert C. Martin", "1999"),
