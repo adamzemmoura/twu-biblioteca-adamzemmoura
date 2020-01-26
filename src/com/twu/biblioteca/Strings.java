@@ -9,5 +9,7 @@ public class Strings {
     public static final String ERROR_MESSAGE_INVALID_SELECTION = "Please select a valid option!";
     public static final String MENU_OPTION_TITLE_SHOW_ALL_BOOKS = "Show all books";
     public static final String MENU_OPTION_TITLE_QUIT = "Quit";
+    public static final String MENU_OPTION_TITLE_CHECKOUT_BOOK = "Checkout a book";
+    public static final String MENU_OPTION_CHECKOUT_BOOK_PROMPT = "Please enter the title of the book you would like to checkout : ";
     public static final String FAREWELL_MESSAGE = "Thanks for using Biblioteca! 👋😄";
 }

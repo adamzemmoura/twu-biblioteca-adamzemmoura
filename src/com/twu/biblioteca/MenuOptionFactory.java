@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 public class MenuOptionFactory {
 
     private static Printer printer = Printer.sharedInstance;
+    private static ConsoleInputReader inputReader = ConsoleInputReader.sharedInstance;
+    private static Library library = Library.sharedInstance;
 
     public static MenuOption createShowAllBooksMenuOption() {
 
         Selectable action = () -> {
             printer.printMessage(Strings.BOOK_LIST_HEADER);
-            List<Book> books = Library.sharedInstance.getAllBooks();
+            List<Book> books = Library.sharedInstance.getAvailableBooks();
             List<String> booksAsStrings = books.stream().map(Book::toString).collect(Collectors.toList());
             printer.printList(booksAsStrings);
         };
@@ -27,5 +29,17 @@ public class MenuOptionFactory {
             System.exit(0);
         };
         return new MenuOption(Strings.MENU_OPTION_TITLE_QUIT, action);
+    }
+
+    public static MenuOption createCheckoutBookByTitleOption() {
+        Selectable action = () -> {
+            try {
+                String bookTitle = inputReader.attemptToReadString(Strings.MENU_OPTION_CHECKOUT_BOOK_PROMPT);
+                library.attemptToCheckOutBookByTitle(bookTitle);
+            } catch (Exception e) {
+                printer.printMessage(e.getMessage());
+            }
+        };
+        return new MenuOption(Strings.MENU_OPTION_TITLE_CHECKOUT_BOOK, action);
     }
 }

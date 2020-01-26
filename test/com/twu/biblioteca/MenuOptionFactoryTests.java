@@ -1,27 +1,43 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
+import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class MenuOptionFactoryTests {
+
+    private PrintStream printStreamMock;
+    private Printer printer;
+    private BufferedReader bufferedReader;
+    private Library library;
+    private ConsoleInputReader inputReader;
+
+    @Before
+    public void setUp() {
+        PrintStream printStreamMock = mock(PrintStream.class);
+        bufferedReader = mock(BufferedReader.class);
+        printer = Printer.sharedInstance;
+        printer.setPrintStream(printStreamMock);
+        inputReader = ConsoleInputReader.sharedInstance;
+        inputReader.setBufferedReader(bufferedReader);
+        library = Library.sharedInstance;
+    }
 
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     @Test
     public void canCreateShowAllBooksMenuOption() {
-        PrintStream printStreamMock = mock(PrintStream.class);
-        Printer printer = Printer.sharedInstance;
-        printer.setPrintStream(printStreamMock);
-
         MenuOption showAllBooks = MenuOptionFactory.createShowAllBooksMenuOption();
         showAllBooks.select();
 
@@ -33,6 +49,19 @@ public class MenuOptionFactoryTests {
         MenuOption quitOption = MenuOptionFactory.createQuitOption();
         exit.expectSystemExit();
         quitOption.select();
+    }
+
+    @Test
+    public void canCreateCheckoutBookByTitleOption() throws Exception {
+        MenuOption checkoutBookByTitleOption = MenuOptionFactory.createCheckoutBookByTitleOption();
+        when(bufferedReader.readLine()).thenReturn("Clean Code");
+
+        AvailabilityStatus statusBeforeOptionSelected = library.checkAvailabilityOfBookWithTitle("Clean Code");
+        checkoutBookByTitleOption.select();
+        AvailabilityStatus statusAfterOptionSelected = library.checkAvailabilityOfBookWithTitle("Clean Code");
+
+        assertThat(statusBeforeOptionSelected, is(AvailabilityStatus.AVAILABLE));
+        assertThat(statusAfterOptionSelected, is(AvailabilityStatus.UNAVAILABLE));
     }
 
     private List<Book> testBooks = Arrays.asList(
