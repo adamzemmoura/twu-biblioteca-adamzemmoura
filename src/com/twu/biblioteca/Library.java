@@ -89,4 +89,8 @@ public class Library {
         availabilityStatusHashMap.put(book.getId(), AvailabilityStatus.AVAILABLE);
         return bookIsAvailable(book);
     }
+
+    public List<Movie> getAllMovies() {
+        return allMovies;
+    }
 }

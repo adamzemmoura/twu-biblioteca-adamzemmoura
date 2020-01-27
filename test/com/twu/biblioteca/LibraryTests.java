@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -100,5 +101,11 @@ public class LibraryTests {
                 .isEmpty();
 
         assertThat(checkedOutBookIncluded, is(false));
+    }
+
+    @Test
+    public void canReturnAListOfAllMovies() {
+        List<Movie> movies = library.getAllMovies();
+        assertThat(movies.size(), is(not(0)));
     }
 }
