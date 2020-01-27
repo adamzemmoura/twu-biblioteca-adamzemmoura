@@ -47,7 +47,8 @@ public class MovieTests {
 
     @Test
     public void movieToStringPrintsNicelyFormattedString() {
-        String expectedOutput = String.format("'%s' (%s)", testMovie1Title, testMovie1YearReleased);
+        String expectedStarRating = Strings.THREE_STAR_RATING;
+        String expectedOutput = String.format("'%s' (%s) %s", testMovie1Title, testMovie1YearReleased, expectedStarRating);
         assertThat(testMovie1.toString(), is(expectedOutput));
     }
 

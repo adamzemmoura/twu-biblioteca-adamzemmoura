@@ -29,4 +29,11 @@ public class Strings {
     public static final String UNSUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Sorry, that book is not available";
     public static final String SUCCESSFUL_BOOK_CHECKIN_MESSAGE = "Thank you for returning the book";
     public static final String UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE = "This is not a valid book to return";
+
+    // star ratings
+    public static final String FIVE_STAR_RATING = "⭐⭐⭐⭐⭐️";
+    public static final String FOUR_STAR_RATING = "⭐⭐⭐⭐️";
+    public static final String THREE_STAR_RATING = "⭐⭐⭐";
+    public static final String TWO_STAR_RATING = "⭐⭐";
+    public static final String ONE_STAR_RATING = "⭐";
 }
