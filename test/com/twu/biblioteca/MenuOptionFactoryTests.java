@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -137,6 +138,18 @@ public class MenuOptionFactoryTests {
         verify(printStreamMock).println(Strings.UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE);
     }
 
+    @Test
+    public void canCreateShowAllMoviesOption() {
+        MenuOption listAllMoviesOption = MenuOptionFactory.createShowAllMoviesOption();
+        String moviesAsList = library.getAllMovies().stream()
+                .map(Movie::toString)
+                .collect(Collectors.joining("\n"));
+
+        listAllMoviesOption.select();
+
+        verify(printStreamMock).println(generateExpectedMovieListOutput());
+    }
+
     private List<Book> testBooks = Arrays.asList(
             new Book("Clean Code", "Robert C. Martin", "1999"),
             new Book("Clean Coder", "Robert C. Martin", "1999"),
@@ -149,6 +162,15 @@ public class MenuOptionFactoryTests {
         testBooks.stream()
                 .map(Book::toString)
                 .forEach(book -> sb.append(String.format(format, book)));
+        return sb.toString();
+    }
+
+    private String generateExpectedMovieListOutput() {
+        StringBuilder sb = new StringBuilder();
+        String format = "\t%s\n";
+        library.getAllMovies().stream()
+                .map(Movie::toString)
+                .forEach(movie -> sb.append(String.format(format, movie)));
         return sb.toString();
     }
 

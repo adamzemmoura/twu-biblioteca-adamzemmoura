@@ -64,6 +64,13 @@ public class MenuOptionFactory {
     }
 
     public static MenuOption createShowAllMoviesOption() {
-        return null;
+        Selectable action = () -> {
+            printer.printMessage(Strings.MOVIE_LIST_HEADER);
+            List<String> moviesStringList = library.getAllMovies().stream()
+                    .map(Movie::toString)
+                    .collect(Collectors.toList());
+            printer.printList(moviesStringList);
+        };
+        return new MenuOption(Strings.MENU_OPTION_TITLE_SHOW_ALL_MOVIES, action);
     }
 }

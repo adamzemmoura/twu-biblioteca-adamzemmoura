@@ -8,6 +8,7 @@ public class Strings {
 
     // headers
     public static final String BOOK_LIST_HEADER = "Here are all the books in the Library : ";
+    public static final String MOVIE_LIST_HEADER = "Here are all the movies in the Library : ";
     public static final String MENU_HEADER = "Main menu : ";
     public static final String ERROR_MESSAGE_INVALID_SELECTION = "Please select a valid option!";
 
@@ -16,6 +17,7 @@ public class Strings {
     public static final String MENU_OPTION_TITLE_CHECKOUT_BOOK = "Checkout a book";
     public static final String MENU_OPTION_TITLE_CHECKIN_BOOK = "Check in book";
     public static final String MENU_OPTION_TITLE_QUIT = "Quit";
+    public static final String MENU_OPTION_TITLE_SHOW_ALL_MOVIES = "Show all movies";
 
     // Input prompts
     public static final String MENU_SELECTION_PROMPT = "Please enter a number : ";
