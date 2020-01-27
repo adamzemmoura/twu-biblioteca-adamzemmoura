@@ -4,18 +4,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class LibraryTests {
 
@@ -29,6 +25,7 @@ public class LibraryTests {
     @After
     public void tearDown() {
         library.setAllBooksToAvailable();
+        library.setAllMoviesToAvailable();
     }
 
     @Test
@@ -38,7 +35,7 @@ public class LibraryTests {
 
     @Test
     public void libraryReturnsListOfBooksWhenThereAreBooks() {
-        List<Book> books = library.getAllBooks();
+        List<LibraryResource> books = library.getAllBooks();
         assertTrue("There is one or more books", books.size() > 0);
     }
 
@@ -105,7 +102,19 @@ public class LibraryTests {
 
     @Test
     public void canReturnAListOfAllMovies() {
-        List<Movie> movies = library.getAllMovies();
+        List<LibraryResource> movies = library.getAllMovies();
         assertThat(movies.size(), is(not(0)));
+    }
+
+    @Test
+    public void canCheckOutMovieThatIsAvailable() throws Exception {
+        String movieTitle = "The Godfather";
+        AvailabilityStatus statusBeforeCheckout = library.checkAvailabilityOfMovieWithTitle(movieTitle);
+
+        library.attemptToCheckOutMovieByTitle(movieTitle);
+        AvailabilityStatus statusAfterCheckout = library.checkAvailabilityOfMovieWithTitle(movieTitle);
+
+        assertThat(statusBeforeCheckout, is(AvailabilityStatus.AVAILABLE));
+        assertThat(statusAfterCheckout, is(AvailabilityStatus.UNAVAILABLE));
     }
 }

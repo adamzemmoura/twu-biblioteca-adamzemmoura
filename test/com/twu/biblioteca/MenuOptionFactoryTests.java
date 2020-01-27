@@ -142,7 +142,7 @@ public class MenuOptionFactoryTests {
     public void canCreateShowAllMoviesOption() {
         MenuOption listAllMoviesOption = MenuOptionFactory.createShowAllMoviesOption();
         String moviesAsList = library.getAllMovies().stream()
-                .map(Movie::toString)
+                .map(LibraryResource::toString)
                 .collect(Collectors.joining("\n"));
 
         listAllMoviesOption.select();
@@ -169,7 +169,7 @@ public class MenuOptionFactoryTests {
         StringBuilder sb = new StringBuilder();
         String format = "\t%s\n";
         library.getAllMovies().stream()
-                .map(Movie::toString)
+                .map(LibraryResource::toString)
                 .forEach(movie -> sb.append(String.format(format, movie)));
         return sb.toString();
     }

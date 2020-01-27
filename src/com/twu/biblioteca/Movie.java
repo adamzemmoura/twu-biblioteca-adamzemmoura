@@ -1,7 +1,10 @@
 package com.twu.biblioteca;
 
-public class Movie {
+import java.util.UUID;
 
+public class Movie implements LibraryResource {
+
+    private final UUID id = UUID.randomUUID();
     private final String title;
     private final String yearReleased;
     private final String director;
@@ -12,6 +15,10 @@ public class Movie {
         this.yearReleased = yearReleased;
         this.director = director;
         this.rating = rating;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getTitle() {

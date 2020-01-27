@@ -2,8 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.UUID;
 
-public class Book {
-
+public class Book implements LibraryResource {
 
     private final String author;
     private final String title;

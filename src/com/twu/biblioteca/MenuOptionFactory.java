@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,8 +13,8 @@ public class MenuOptionFactory {
 
         Selectable action = () -> {
             printer.printMessage(Strings.BOOK_LIST_HEADER);
-            List<Book> books = Library.sharedInstance.getAvailableBooks();
-            List<String> booksAsStrings = books.stream().map(Book::toString).collect(Collectors.toList());
+            List<LibraryResource> books = Library.sharedInstance.getAvailableBooks();
+            List<String> booksAsStrings = books.stream().map(LibraryResource::toString).collect(Collectors.toList());
             printer.printList(booksAsStrings);
         };
 
@@ -67,7 +66,7 @@ public class MenuOptionFactory {
         Selectable action = () -> {
             printer.printMessage(Strings.MOVIE_LIST_HEADER);
             List<String> moviesStringList = library.getAllMovies().stream()
-                    .map(Movie::toString)
+                    .map(LibraryResource::toString)
                     .collect(Collectors.toList());
             printer.printList(moviesStringList);
         };
