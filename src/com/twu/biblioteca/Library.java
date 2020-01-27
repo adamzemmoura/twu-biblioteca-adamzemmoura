@@ -7,19 +7,9 @@ public class Library {
 
     public static Library sharedInstance = new Library();
 
-    private List<LibraryResource> allBooks = Arrays.asList(
-            new Book("Clean Code", "Robert C. Martin", "1999"),
-            new Book("Clean Coder", "Robert C. Martin", "1999"),
-            new Book("Refactoring", "Martin Fowler", "1999")
-    );
+    private List<LibraryResource> allBooks = TestData.books;
 
-    private List<LibraryResource> allMovies = Arrays.asList(
-            new Movie("The Godfather", "1972", "Francis Ford Coppola", MovieRating.FIVE),
-            new Movie("The Shawshank Redemption", "1994", "Frank Darabont", MovieRating.THREE),
-            new Movie("Schindler's List", "1993", "Steven Spielberg", MovieRating.FIVE),
-            new Movie("Raging Bull", "1980", "Martin Scorsese", MovieRating.FOUR),
-            new Movie("Casablanca", "1946", "Michael Curtiz", MovieRating.ONE)
-    );
+    private List<LibraryResource> allMovies = TestData.movies;
 
     private HashMap<UUID, AvailabilityStatus> availabilityStatusHashMap;
 

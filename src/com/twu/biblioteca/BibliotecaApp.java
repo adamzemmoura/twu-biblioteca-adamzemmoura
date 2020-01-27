@@ -1,9 +1,5 @@
 package com.twu.biblioteca;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class BibliotecaApp {
 
     private Printer printer = Printer.sharedInstance;
@@ -17,19 +13,17 @@ public class BibliotecaApp {
 
         displayWelcomeMessage();
 
+        promptUserToLogIn();
+
         while(true) {
             menu.display();
             menu.handleUserSelection();
         }
     }
 
+    private void promptUserToLogIn() {
 
-
-
-
-
-
-
+    }
 
     private void displayWelcomeMessage() {
         printer.printMessage(Strings.WELCOME_MESSAGE);
