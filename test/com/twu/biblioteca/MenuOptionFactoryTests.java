@@ -141,13 +141,24 @@ public class MenuOptionFactoryTests {
     @Test
     public void canCreateShowAllMoviesOption() {
         MenuOption listAllMoviesOption = MenuOptionFactory.createShowAllMoviesOption();
-        String moviesAsList = library.getAllMovies().stream()
-                .map(LibraryResource::toString)
-                .collect(Collectors.joining("\n"));
 
         listAllMoviesOption.select();
 
         verify(printStreamMock).println(generateExpectedMovieListOutput());
+    }
+
+    @Test
+    public void canCreateCheckoutMovieOption() throws Exception {
+        String movieTitle = "The Godfather";
+        MenuOption checkoutMovieByTitleOption = MenuOptionFactory.createCheckoutMovieByTitleOption();
+        when(bufferedReader.readLine()).thenReturn(movieTitle);
+
+        AvailabilityStatus statusBeforeOptionSelected = library.checkAvailabilityOfMovieWithTitle(movieTitle);
+        checkoutMovieByTitleOption.select();
+        AvailabilityStatus statusAfterOptionSelected = library.checkAvailabilityOfMovieWithTitle(movieTitle);
+
+        assertThat(statusBeforeOptionSelected, is(AvailabilityStatus.AVAILABLE));
+        assertThat(statusAfterOptionSelected, is(AvailabilityStatus.UNAVAILABLE));
     }
 
     private List<Book> testBooks = Arrays.asList(

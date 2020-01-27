@@ -72,4 +72,22 @@ public class MenuOptionFactory {
         };
         return new MenuOption(Strings.MENU_OPTION_TITLE_SHOW_ALL_MOVIES, action);
     }
+
+    public static MenuOption createCheckoutMovieByTitleOption() {
+
+        Selectable action = () -> {
+            try {
+                String movieTitle = inputReader.attemptToReadString(Strings.MENU_OPTION_TITLE_CHECKOUT_MOVIE_PROMPT);
+                boolean successfullyCheckedOut = library.attemptToCheckOutMovieByTitle(movieTitle);
+                String userFeedbackMessage = successfullyCheckedOut ?
+                        Strings.SUCCESSFUL_MOVIE_CHECKOUT_MESSAGE :
+                        Strings.UNSUCCESSFUL_MOVIE_CHECKOUT_MESSAGE;
+                printer.printMessage(userFeedbackMessage);
+            } catch (Exception e) {
+                printer.printMessage(e.getMessage());
+            }
+        };
+
+        return new MenuOption(Strings.MENU_OPTION_TITLE_CHECKOUT_MOVIES, action);
+    }
 }

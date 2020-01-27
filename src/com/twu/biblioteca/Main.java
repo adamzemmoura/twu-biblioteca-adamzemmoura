@@ -16,6 +16,7 @@ public class Main {
                 MenuOptionFactory.createCheckoutBookByTitleOption(),
                 MenuOptionFactory.createCheckinBookByTitleOption(),
                 MenuOptionFactory.createShowAllMoviesOption(),
+                MenuOptionFactory.createCheckoutMovieByTitleOption(),
                 MenuOptionFactory.createQuitOption()
         );
         return new Menu(menuOptions);

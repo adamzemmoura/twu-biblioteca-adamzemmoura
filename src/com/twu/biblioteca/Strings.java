@@ -18,15 +18,19 @@ public class Strings {
     public static final String MENU_OPTION_TITLE_CHECKIN_BOOK = "Check in book";
     public static final String MENU_OPTION_TITLE_QUIT = "Quit";
     public static final String MENU_OPTION_TITLE_SHOW_ALL_MOVIES = "Show all movies";
+    public static final String MENU_OPTION_TITLE_CHECKOUT_MOVIES = "Checkout a movie";
 
     // Input prompts
     public static final String MENU_SELECTION_PROMPT = "Please enter a number : ";
     public static final String MENU_OPTION_CHECKOUT_BOOK_PROMPT = "Please enter the title of the book you would like to checkout : ";
     public static final String MENU_OPTION_CHECKIN_BOOK_PROMPT = "Please enter the title of the book you would like to checkin : ";
+    public static final String MENU_OPTION_TITLE_CHECKOUT_MOVIE_PROMPT = "Please enter the title of the movie you would like to checkout : ";
 
     // user feedback messages
     public static final String SUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Thank you! Enjoy the book";
     public static final String UNSUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Sorry, that book is not available";
+    public static final String SUCCESSFUL_MOVIE_CHECKOUT_MESSAGE = "Thank you! Enjoy the movie";
+    public static final String UNSUCCESSFUL_MOVIE_CHECKOUT_MESSAGE = "Sorry, that movie is not available";
     public static final String SUCCESSFUL_BOOK_CHECKIN_MESSAGE = "Thank you for returning the book";
     public static final String UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE = "This is not a valid book to return";
 
