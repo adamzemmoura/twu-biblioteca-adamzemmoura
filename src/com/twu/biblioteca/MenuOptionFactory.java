@@ -62,4 +62,8 @@ public class MenuOptionFactory {
         };
         return new MenuOption(Strings.MENU_OPTION_TITLE_CHECKIN_BOOK, action);
     }
+
+    public static MenuOption createShowAllMoviesOption() {
+        return null;
+    }
 }

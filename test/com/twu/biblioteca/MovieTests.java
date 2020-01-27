@@ -45,4 +45,10 @@ public class MovieTests {
         assertThat(testMovie1.getRating(), is(testMovie1Rating));
     }
 
+    @Test
+    public void movieToStringPrintsNicelyFormattedString() {
+        String expectedOutput = String.format("'%s' (%s)", testMovie1Title, testMovie1YearReleased);
+        assertThat(testMovie1.toString(), is(expectedOutput));
+    }
+
 }
