@@ -1,12 +1,5 @@
 package com.twu.biblioteca;
 
-
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Movie {
 
     private final String title;
