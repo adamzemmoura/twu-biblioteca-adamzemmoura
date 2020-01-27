@@ -24,8 +24,7 @@ public class LibraryTests {
 
     @After
     public void tearDown() {
-        library.setAllBooksToAvailable();
-        library.setAllMoviesToAvailable();
+        library.setInventoryToAvailable();
     }
 
     @Test

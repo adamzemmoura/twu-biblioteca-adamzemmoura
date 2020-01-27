@@ -33,7 +33,7 @@ public class Library {
         setAllMoviesToAvailable();
     }
 
-    public void setAllBooksToAvailable() {
+    private void setAllBooksToAvailable() {
         allBooks.forEach(book -> {
             UUID id = book.getId();
             AvailabilityStatus status = AvailabilityStatus.AVAILABLE;
@@ -41,7 +41,7 @@ public class Library {
         });
     }
 
-    public void setAllMoviesToAvailable() {
+    private void setAllMoviesToAvailable() {
         allMovies.forEach(book -> {
             UUID id = book.getId();
             AvailabilityStatus status = AvailabilityStatus.AVAILABLE;
@@ -49,8 +49,15 @@ public class Library {
         });
     }
 
+    // Book methods
     public List<LibraryResource> getAllBooks() {
         return moreThanOneBook() ? allBooks : Collections.EMPTY_LIST;
+    }
+
+    public List<LibraryResource> getAvailableBooks() {
+        return allBooks.stream()
+                .filter(this::itemIsAvailable)
+                .collect(Collectors.toList());
     }
 
     private boolean moreThanOneBook() {
@@ -68,19 +75,28 @@ public class Library {
         return attemptToCheckoutLibraryResource(selectedBook);
     }
 
+    public boolean attemptToCheckinBookByTitle(String title) throws ItemNotFoundException {
+        LibraryResource book = attemptToFilterByTitle(allBooks, title);
+        availabilityStatusHashMap.put(book.getId(), AvailabilityStatus.AVAILABLE);
+        return itemIsAvailable(book);
+    }
+
+    // Movie methods
+    public List<LibraryResource> getAllMovies() {
+        return allMovies;
+    }
+
     public boolean attemptToCheckOutMovieByTitle(String title) throws ItemNotFoundException {
         LibraryResource selectedMovie = attemptToFilterByTitle(allMovies, title);
         return attemptToCheckoutLibraryResource(selectedMovie);
     }
 
-    private boolean attemptToCheckoutLibraryResource(LibraryResource resource) throws ItemNotFoundException {
-        UUID id = resource.getId();
-        if ( itemIsNotAvailable(resource) ) return false;
-        availabilityStatusHashMap.put(id, AvailabilityStatus.UNAVAILABLE);
-        return true;
+    public AvailabilityStatus checkAvailabilityOfMovieWithTitle(String movieTitle) throws ItemNotFoundException {
+        LibraryResource movie = attemptToFilterByTitle(allMovies, movieTitle);
+        return availabilityStatusHashMap.get(movie.getId());
     }
 
-
+    // LibraryResource methods
     private LibraryResource attemptToFilterByTitle(List<LibraryResource> list, String title) throws ItemNotFoundException {
         return list.stream()
                 .filter(item -> item.getTitle().equalsIgnoreCase(title))
@@ -90,9 +106,11 @@ public class Library {
                         ));
     }
 
-    public AvailabilityStatus checkAvailabilityOfMovieWithTitle(String movieTitle) throws ItemNotFoundException {
-        LibraryResource movie = attemptToFilterByTitle(allMovies, movieTitle);
-        return availabilityStatusHashMap.get(movie.getId());
+    private boolean attemptToCheckoutLibraryResource(LibraryResource resource) throws ItemNotFoundException {
+        UUID id = resource.getId();
+        if ( itemIsNotAvailable(resource) ) return false;
+        availabilityStatusHashMap.put(id, AvailabilityStatus.UNAVAILABLE);
+        return true;
     }
 
     private boolean itemIsNotAvailable(LibraryResource item) {
@@ -103,21 +121,5 @@ public class Library {
     private boolean itemIsAvailable(LibraryResource resource) {
         AvailabilityStatus status = availabilityStatusHashMap.get(resource.getId());
         return status == AvailabilityStatus.AVAILABLE;
-    }
-
-    public List<LibraryResource> getAvailableBooks() {
-        return allBooks.stream()
-                .filter(this::itemIsAvailable)
-                .collect(Collectors.toList());
-    }
-
-    public boolean attemptToCheckinBookByTitle(String title) throws ItemNotFoundException {
-        LibraryResource book = attemptToFilterByTitle(allBooks, title);
-        availabilityStatusHashMap.put(book.getId(), AvailabilityStatus.AVAILABLE);
-        return itemIsAvailable(book);
-    }
-
-    public List<LibraryResource> getAllMovies() {
-        return allMovies;
     }
 }

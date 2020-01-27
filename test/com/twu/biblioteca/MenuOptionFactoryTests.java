@@ -37,7 +37,7 @@ public class MenuOptionFactoryTests {
 
     @After
     public void tearDown() {
-        library.setAllBooksToAvailable();
+        library.setInventoryToAvailable();
     }
 
     @Rule
