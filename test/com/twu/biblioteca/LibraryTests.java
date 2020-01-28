@@ -174,7 +174,19 @@ public class LibraryTests {
         assertThat(rentalsAfterCheckin.size(), is(0));
     }
 
-    // can retrieve a list of of Library resource rentals
-
     // can retrieve a list of LibraryResourceRental which takes a User and returns just their rentals
+    @Test
+    public void canRetrieveAListOfRentalsForGivenUser() throws Exception {
+        LibraryResource book = TestData.books.get(0);
+        LibraryResource movie = TestData.movies.get(0);
+        library.attemptToCheckOutBookByTitle(book.getTitle());
+        library.attemptToCheckOutMovieByTitle(movie.getTitle());
+
+        List<LibraryResourceRental> rentals = library.getAllRentalsForUser(testUser);
+        List<LibraryResource> resources = rentals.stream().map(resource -> resource.getResource()).collect(Collectors.toList());
+
+        assertThat(rentals.size(), is(2));
+        assertTrue(resources.contains(book));
+        assertTrue(resources.contains(movie));
+    }
 }

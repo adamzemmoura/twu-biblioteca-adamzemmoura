@@ -131,4 +131,10 @@ public class Library {
     public List<LibraryResourceRental> getAllRentals() {
         return this.rentals;
     }
+
+    public List<LibraryResourceRental> getAllRentalsForUser(User user) {
+        return rentals.stream()
+                .filter(rental -> rental.getUser().equals(user))
+                .collect(Collectors.toList());
+    }
 }
