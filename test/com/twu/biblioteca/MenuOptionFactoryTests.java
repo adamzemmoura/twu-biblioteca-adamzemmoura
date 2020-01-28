@@ -25,7 +25,7 @@ public class MenuOptionFactoryTests {
     private ConsoleInputReader inputReader;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         printStreamMock = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         printer = Printer.sharedInstance;
@@ -33,6 +33,13 @@ public class MenuOptionFactoryTests {
         inputReader = ConsoleInputReader.sharedInstance;
         inputReader.setBufferedReader(bufferedReader);
         library = Library.sharedInstance;
+        loginTestUser();
+    }
+
+    private void loginTestUser() throws AuthenticationException {
+        User user = TestData.users.get(0);
+        String password = "secret";
+        AuthenticationService.sharedInstance.attemptLogin(user.getLibraryNumber(), password);
     }
 
     @After

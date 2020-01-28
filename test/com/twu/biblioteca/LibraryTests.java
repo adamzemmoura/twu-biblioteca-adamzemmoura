@@ -12,19 +12,33 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LibraryTests {
 
     private Library library;
+    private AuthenticationService authenticationService;
 
     @Before
     public void setUp() {
         library = Library.sharedInstance;
+        authenticationService = AuthenticationService.sharedInstance;
+        loginTestUserToAuthService();
     }
 
     @After
     public void tearDown() {
         library.setInventoryToAvailable();
+        authenticationService.logout();
+    }
+
+    private void loginTestUserToAuthService() {
+        try {
+            authenticationService.attemptLogin("111-1111", "secret");
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -115,5 +129,18 @@ public class LibraryTests {
 
         assertThat(statusBeforeCheckout, is(AvailabilityStatus.AVAILABLE));
         assertThat(statusAfterCheckout, is(AvailabilityStatus.UNAVAILABLE));
+    }
+
+    @Test
+    public void checkingOutABookShouldFailIfNoUserLoggedIntoAuthenticationService() throws Exception {
+        authenticationService.logout();
+        LibraryResource book = TestData.books.get(0);
+        LibraryResource movie = TestData.movies.get(0);
+
+        boolean checkedOutBook = library.attemptToCheckOutBookByTitle(book.getTitle());
+        boolean checkedOutMovie = library.attemptToCheckOutMovieByTitle(movie.getTitle());
+
+        assertThat(checkedOutBook, is(false));
+        assertThat(checkedOutMovie, is(false));
     }
 }

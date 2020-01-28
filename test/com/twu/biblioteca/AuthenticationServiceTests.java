@@ -4,8 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -56,6 +55,18 @@ public class AuthenticationServiceTests {
         System.out.println(libraryNumber);
         authenticationService.attemptLogin(libraryNumber, "secret");
         verify(delegateMock).userDidSuccessfullyLogin();
+    }
+
+    @Test
+    public void logoutSetsCurrentlyLoggedInUserToNull() throws Exception {
+        User testUser = TestData.users.get(0);
+        authenticationService.attemptLogin(testUser.getLibraryNumber(), "secret");
+        User currentUser = authenticationService.getCurrentUser();
+
+        authenticationService.logout();
+
+        assertNotNull(currentUser);
+        assertNull(authenticationService.getCurrentUser());
     }
 
 }

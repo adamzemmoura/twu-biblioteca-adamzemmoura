@@ -97,6 +97,7 @@ public class Library {
     }
 
     private boolean attemptToCheckoutLibraryResource(LibraryResource resource) throws ItemNotFoundException {
+        if (AuthenticationService.sharedInstance.getCurrentUser() == null) return false;
         UUID id = resource.getId();
         if ( itemIsNotAvailable(resource) ) return false;
         availabilityStatusHashMap.put(id, AvailabilityStatus.UNAVAILABLE);

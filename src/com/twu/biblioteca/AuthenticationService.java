@@ -9,7 +9,7 @@ public class AuthenticationService {
     public static AuthenticationService sharedInstance = new AuthenticationService();
     private static Map<String, String> libraryNumberToPasswordMap;
     public static AuthenticationServiceDelegate delegate = null;
-    private static String currentlyLoggedInUserLibraryNumber;
+    private static User currentUser;
     private static List<User> users = TestData.users;
 
     private AuthenticationService() {
@@ -24,10 +24,17 @@ public class AuthenticationService {
 
     public void attemptLogin(String libraryNumber, String password) throws AuthenticationException {
         validateCredentials(libraryNumber, password);
-        this.currentlyLoggedInUserLibraryNumber = libraryNumber;
+        this.currentUser = lookupUser(libraryNumber);
         if (delegate != null) {
             delegate.userDidSuccessfullyLogin();
         }
+    }
+
+    private User lookupUser(String libraryNumber) {
+        return users.stream()
+                .filter(user -> user.getLibraryNumber().equals(libraryNumber))
+                .findFirst()
+                .get();
     }
 
     private void validateCredentials(String libraryNumber, String password) throws AuthenticationException {
@@ -56,9 +63,12 @@ public class AuthenticationService {
     }
 
     public User getCurrentUser() {
-        return TestData.users.get(0);
+        return currentUser;
     }
 
+    public void logout() {
+        currentUser = null;
+    }
 
     // stores users
     // users have a library number of format xxx-xxxx
