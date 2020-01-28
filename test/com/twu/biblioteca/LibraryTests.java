@@ -12,6 +12,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -160,6 +161,18 @@ public class LibraryTests {
     }
 
     // when a user checks a library resource back in, the corresponding LibraryRentalResource is removed from the Library
+    @Test
+    public void whenAUserChecksALibraryResourceBackInTheCorrespondingLibraryResourceRentalIsRemoved() throws Exception {
+        LibraryResource book = TestData.books.get(0);
+        library.attemptToCheckOutBookByTitle(book.getTitle());
+        List<LibraryResourceRental> rentalsAfterCheckout = library.getAllRentals();
+
+        library.attemptToCheckinBookByTitle(book.getTitle());
+        List<LibraryResourceRental> rentalsAfterCheckin = library.getAllRentals();
+
+        assertThat(rentalsAfterCheckout.size(), is(1));
+        assertThat(rentalsAfterCheckin.size(), is(0));
+    }
 
     // can retrieve a list of of Library resource rentals
 

@@ -71,7 +71,14 @@ public class Library {
     public boolean attemptToCheckinBookByTitle(String title) throws ItemNotFoundException {
         LibraryResource book = attemptToFilterByTitle(allBooks, title);
         availabilityStatusHashMap.put(book.getId(), AvailabilityStatus.AVAILABLE);
+        removeLibraryResourceRentalWithTitle(title);
         return itemIsAvailable(book);
+    }
+
+    private void removeLibraryResourceRentalWithTitle(String title) {
+        rentals = rentals.stream()
+                .filter(resource -> !resource.getResource().getTitle().equals(title) )
+                .collect(Collectors.toList());
     }
 
     // Movie methods
