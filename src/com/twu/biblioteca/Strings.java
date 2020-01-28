@@ -11,6 +11,7 @@ public class Strings {
     public static final String MOVIE_LIST_HEADER = "Here are all the movies in the Library : ";
     public static final String MENU_HEADER = "Main menu : ";
     public static final String ERROR_MESSAGE_INVALID_SELECTION = "Please select a valid option!";
+    public static final String ERROR_MESSAGE_TOO_MANY_LOGIN_ATTEMPTS = "Too many login attempts. Goodbye!";
 
     // menu titles
     public static final String MENU_OPTION_TITLE_SHOW_ALL_BOOKS = "Show all books";
@@ -25,6 +26,8 @@ public class Strings {
     public static final String MENU_OPTION_CHECKOUT_BOOK_PROMPT = "Please enter the title of the book you would like to checkout : ";
     public static final String MENU_OPTION_CHECKIN_BOOK_PROMPT = "Please enter the title of the book you would like to checkin : ";
     public static final String MENU_OPTION_TITLE_CHECKOUT_MOVIE_PROMPT = "Please enter the title of the movie you would like to checkout : ";
+    public static final String LOGIN_PROMPT = "Please enter your library number to login : ";
+    public static final String PASSWORD_PROMPT = "Please enter your password : ";
 
     // user feedback messages
     public static final String SUCCESSFUL_BOOK_CHECKOUT_MESSAGE = "Thank you! Enjoy the book";
@@ -33,6 +36,8 @@ public class Strings {
     public static final String UNSUCCESSFUL_MOVIE_CHECKOUT_MESSAGE = "Sorry, that movie is not available";
     public static final String SUCCESSFUL_BOOK_CHECKIN_MESSAGE = "Thank you for returning the book";
     public static final String UNSUCCESSFUL_BOOK_CHECKIN_MESSAGE = "This is not a valid book to return";
+    public static final String LOGIN_SUCCESS_MESSAGE = "Login was successful. Welcome back ";
+    public static final String FAILED_LOGIN_ATTEMPT = "Login details were incorrect, please try again";
 
     // star ratings
     public static final String FIVE_STAR_RATING = "⭐⭐⭐⭐⭐️";
