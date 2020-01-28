@@ -64,6 +64,8 @@ public class LibraryTests {
 
         assertThat(statusBeforeCheckout, is(AvailabilityStatus.AVAILABLE));
         assertThat(statusAfterCheckout, is(AvailabilityStatus.UNAVAILABLE));
+
+        library.attemptToCheckinBookByTitle("Clean Code");
     }
 
     @Test
@@ -102,6 +104,7 @@ public class LibraryTests {
     public void attemptingToCheckoutBookWithCorrectTitleIgnoringCaseSucceeds() throws Exception {
         boolean result = library.attemptToCheckOutBookByTitle("cLeaN CodE");
         assertThat(result, is(true));
+        library.attemptToCheckinBookByTitle("Clean Code");
     }
 
     @Test
@@ -114,6 +117,8 @@ public class LibraryTests {
                 .isEmpty();
 
         assertThat(checkedOutBookIncluded, is(false));
+
+        library.attemptToCheckinBookByTitle("Clean Code");
     }
 
     @Test
@@ -132,6 +137,8 @@ public class LibraryTests {
 
         assertThat(statusBeforeCheckout, is(AvailabilityStatus.AVAILABLE));
         assertThat(statusAfterCheckout, is(AvailabilityStatus.UNAVAILABLE));
+
+        library.attemptToCheckinMovieByTitle(movieTitle);
     }
 
     @Test
@@ -142,6 +149,9 @@ public class LibraryTests {
 
         boolean checkedOutBook = library.attemptToCheckOutBookByTitle(book.getTitle());
         boolean checkedOutMovie = library.attemptToCheckOutMovieByTitle(movie.getTitle());
+
+        library.attemptToCheckinBookByTitle(book.getTitle());
+        library.attemptToCheckinMovieByTitle(movie.getTitle());
 
         assertThat(checkedOutBook, is(false));
         assertThat(checkedOutMovie, is(false));
@@ -158,6 +168,9 @@ public class LibraryTests {
         List<LibraryResourceRental> rentals = library.getAllRentals();
 
         assertThat(rentals.size(), is(2));
+
+        library.attemptToCheckinMovieByTitle(movie.getTitle());
+        library.attemptToCheckinBookByTitle(book.getTitle());
     }
 
     // when a user checks a library resource back in, the corresponding LibraryRentalResource is removed from the Library
@@ -174,7 +187,6 @@ public class LibraryTests {
         assertThat(rentalsAfterCheckin.size(), is(0));
     }
 
-    // can retrieve a list of LibraryResourceRental which takes a User and returns just their rentals
     @Test
     public void canRetrieveAListOfRentalsForGivenUser() throws Exception {
         LibraryResource book = TestData.books.get(0);
@@ -184,6 +196,9 @@ public class LibraryTests {
 
         List<LibraryResourceRental> rentals = library.getAllRentalsForUser(testUser);
         List<LibraryResource> resources = rentals.stream().map(resource -> resource.getResource()).collect(Collectors.toList());
+
+        library.attemptToCheckinBookByTitle(book.getTitle());
+        library.attemptToCheckinMovieByTitle(movie.getTitle());
 
         assertThat(rentals.size(), is(2));
         assertTrue(resources.contains(book));

@@ -96,7 +96,14 @@ public class Library {
         return availabilityStatusHashMap.get(movie.getId());
     }
 
+    public boolean attemptToCheckinMovieByTitle(String title) throws ItemNotFoundException {
+        LibraryResource movie = attemptToFilterByTitle(allMovies, title);
+        availabilityStatusHashMap.put(movie.getId(), AvailabilityStatus.AVAILABLE);
+        removeLibraryResourceRentalWithTitle(title);
+        return itemIsAvailable(movie);
+    }
     // LibraryResource methods
+
     private LibraryResource attemptToFilterByTitle(List<LibraryResource> list, String title) throws ItemNotFoundException {
         return list.stream()
                 .filter(item -> item.getTitle().equalsIgnoreCase(title))

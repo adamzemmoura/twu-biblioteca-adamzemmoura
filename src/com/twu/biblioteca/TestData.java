@@ -24,7 +24,7 @@ public class TestData {
 
 
     public static final List<User> users = Arrays.asList(
-            new User("111-1111"),
-            new User("222-3333")
+            new User("111-1111", UserRole.LIBRARIAN),
+            new User("222-3333", UserRole.CUSTOMER)
     );
 }
