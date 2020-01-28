@@ -1,4 +1,7 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.models;
+
+import com.twu.biblioteca.interfaces.LibraryResource;
+import com.twu.biblioteca.enums.MovieRating;
 
 import java.util.UUID;
 

@@ -1,5 +1,13 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.enums.AvailabilityStatus;
+import com.twu.biblioteca.exceptions.AuthenticationException;
+import com.twu.biblioteca.factories.MenuOptionFactory;
+import com.twu.biblioteca.interfaces.LibraryResource;
+import com.twu.biblioteca.models.Book;
+import com.twu.biblioteca.models.User;
+import com.twu.biblioteca.resources.Strings;
+import com.twu.biblioteca.resources.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,7 +18,6 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

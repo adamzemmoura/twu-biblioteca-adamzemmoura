@@ -1,5 +1,10 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.exceptions.AuthenticationException;
+import com.twu.biblioteca.interfaces.AuthenticationServiceDelegate;
+import com.twu.biblioteca.models.User;
+import com.twu.biblioteca.resources.TestData;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,16 +74,5 @@ public class AuthenticationService {
     public void logout() {
         currentUser = null;
     }
-
-    // stores users
-    // users have a library number of format xxx-xxxx
-    // users have a password
-
-    // must be able to log in using a library number and password
-    // check if library number is valid
-    // retrieve user based on provided library number
-    // validate if password is correct
-
-
 
 }

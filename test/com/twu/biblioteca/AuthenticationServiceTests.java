@@ -1,5 +1,9 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.exceptions.AuthenticationException;
+import com.twu.biblioteca.interfaces.AuthenticationServiceDelegate;
+import com.twu.biblioteca.models.User;
+import com.twu.biblioteca.resources.TestData;
 import org.junit.Before;
 import org.junit.Test;
 

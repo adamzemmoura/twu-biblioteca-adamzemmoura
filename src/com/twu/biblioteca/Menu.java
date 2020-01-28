@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.exceptions.InvalidInputException;
+import com.twu.biblioteca.resources.Strings;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

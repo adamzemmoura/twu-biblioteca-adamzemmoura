@@ -1,6 +1,8 @@
 package com.twu.biblioteca;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
+import com.twu.biblioteca.enums.MovieRating;
+import com.twu.biblioteca.models.Movie;
+import com.twu.biblioteca.resources.Strings;
 import org.junit.Before;
 import org.junit.Test;
 

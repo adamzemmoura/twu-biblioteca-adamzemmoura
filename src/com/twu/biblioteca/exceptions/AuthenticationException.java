@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.exceptions;
 
 public class AuthenticationException extends Exception {
     public AuthenticationException(String message) {

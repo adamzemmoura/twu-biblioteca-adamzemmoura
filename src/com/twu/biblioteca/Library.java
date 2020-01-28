@@ -1,5 +1,11 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.enums.AvailabilityStatus;
+import com.twu.biblioteca.exceptions.ItemNotFoundException;
+import com.twu.biblioteca.interfaces.LibraryResource;
+import com.twu.biblioteca.models.User;
+import com.twu.biblioteca.resources.TestData;
+
 import java.util.*;
 import java.util.stream.Collectors;
 

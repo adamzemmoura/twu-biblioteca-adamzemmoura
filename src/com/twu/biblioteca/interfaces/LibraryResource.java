@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.interfaces;
 
 import java.util.UUID;
 

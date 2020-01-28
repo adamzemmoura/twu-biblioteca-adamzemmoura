@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.interfaces.Selectable;
+
 public class MenuOption {
 
     private String title;

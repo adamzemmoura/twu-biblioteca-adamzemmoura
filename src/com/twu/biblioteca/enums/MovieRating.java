@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.enums;
+
+import com.twu.biblioteca.resources.Strings;
 
 public enum MovieRating {
     ONE, TWO, THREE, FOUR, FIVE;

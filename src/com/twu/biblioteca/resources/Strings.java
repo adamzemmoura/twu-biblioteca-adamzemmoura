@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.resources;
 
 public class Strings {
 
@@ -12,6 +12,7 @@ public class Strings {
     public static final String MENU_HEADER = "Main menu : ";
     public static final String ERROR_MESSAGE_INVALID_SELECTION = "Please select a valid option!";
     public static final String ERROR_MESSAGE_TOO_MANY_LOGIN_ATTEMPTS = "Too many login attempts. Goodbye!";
+    public static final String CURRENT_RENTALS_HEADER = "Here is a list of the current rentals : ";
 
     // menu titles
     public static final String MENU_OPTION_TITLE_SHOW_ALL_BOOKS = "Show all books";
@@ -20,6 +21,7 @@ public class Strings {
     public static final String MENU_OPTION_TITLE_QUIT = "Quit";
     public static final String MENU_OPTION_TITLE_SHOW_ALL_MOVIES = "Show all movies";
     public static final String MENU_OPTION_TITLE_CHECKOUT_MOVIES = "Checkout a movie";
+    public static final String MENU_OPTION_TITLE_SHOW_CURRENT_RENTALS = "Show current rentals";
 
     // Input prompts
     public static final String MENU_SELECTION_PROMPT = "Please enter a number : ";

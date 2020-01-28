@@ -1,5 +1,11 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.enums.AvailabilityStatus;
+import com.twu.biblioteca.exceptions.AuthenticationException;
+import com.twu.biblioteca.exceptions.ItemNotFoundException;
+import com.twu.biblioteca.interfaces.LibraryResource;
+import com.twu.biblioteca.models.User;
+import com.twu.biblioteca.resources.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +18,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class LibraryTests {
 
@@ -157,7 +161,6 @@ public class LibraryTests {
         assertThat(checkedOutMovie, is(false));
     }
 
-    // Library Resource Tests
     @Test
     public void whenAUserChecksOutALibraryResourcesLibraryResourceRentalAddedToLibrary() throws Exception {
         LibraryResource movie = TestData.movies.get(0);
@@ -173,7 +176,6 @@ public class LibraryTests {
         library.attemptToCheckinBookByTitle(book.getTitle());
     }
 
-    // when a user checks a library resource back in, the corresponding LibraryRentalResource is removed from the Library
     @Test
     public void whenAUserChecksALibraryResourceBackInTheCorrespondingLibraryResourceRentalIsRemoved() throws Exception {
         LibraryResource book = TestData.books.get(0);

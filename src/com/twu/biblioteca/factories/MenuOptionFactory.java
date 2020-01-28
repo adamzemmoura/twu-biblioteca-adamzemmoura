@@ -1,4 +1,10 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.factories;
+
+import com.twu.biblioteca.*;
+import com.twu.biblioteca.exceptions.ItemNotFoundException;
+import com.twu.biblioteca.interfaces.LibraryResource;
+import com.twu.biblioteca.interfaces.Selectable;
+import com.twu.biblioteca.resources.Strings;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,5 +95,19 @@ public class MenuOptionFactory {
         };
 
         return new MenuOption(Strings.MENU_OPTION_TITLE_CHECKOUT_MOVIES, action);
+    }
+
+    public static MenuOption createShowCurrentRentalsOption() {
+
+        Selectable action = () -> {
+            printer.printMessage(Strings.CURRENT_RENTALS_HEADER);
+            List<String> rentals = library.getAllRentals().stream()
+                    .map(LibraryResourceRental::toString)
+                    .collect(Collectors.toList());
+            printer.printList(rentals);
+        };
+
+        return new MenuOption(Strings.MENU_OPTION_TITLE_SHOW_CURRENT_RENTALS, action);
+
     }
 }

@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.factories.MenuOptionFactory;
+import com.twu.biblioteca.resources.Strings;
 import org.junit.Before;
 import org.junit.Test;
 
