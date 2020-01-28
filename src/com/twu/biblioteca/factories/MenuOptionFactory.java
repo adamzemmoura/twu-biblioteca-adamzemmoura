@@ -4,6 +4,7 @@ import com.twu.biblioteca.*;
 import com.twu.biblioteca.exceptions.ItemNotFoundException;
 import com.twu.biblioteca.interfaces.LibraryResource;
 import com.twu.biblioteca.interfaces.Selectable;
+import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.resources.Strings;
 
 import java.util.List;
@@ -109,5 +110,21 @@ public class MenuOptionFactory {
 
         return new MenuOption(Strings.MENU_OPTION_TITLE_SHOW_CURRENT_RENTALS, action);
 
+    }
+
+    public static MenuOption createShowUserInformationOption() {
+        Selectable action = () -> {
+            printer.printMessage(Strings.SHOW_USER_INFO_HEADER);
+            User currentUser = AuthenticationService.sharedInstance.getCurrentUser();
+            String name = currentUser.getName();
+            String libraryNumber = currentUser.getLibraryNumber();
+            String email = currentUser.getEmail();
+            String phoneNumber = currentUser.getPhoneNumber();
+            String format = "\tname: %s\n\tlibrary number : %s\n\temail : %s\n\tphone number : %s\n";
+            String message = String.format(format, name, libraryNumber, email, phoneNumber);
+            printer.printMessage(message);
+        };
+
+        return new MenuOption(Strings.MENU_OPTION_TITLE_SHOW_YOUR_INFORMATION, action);
     }
 }

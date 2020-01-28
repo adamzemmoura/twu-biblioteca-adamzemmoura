@@ -34,6 +34,7 @@ public class MenuFactory {
                 MenuOptionFactory.createCheckinBookByTitleOption(),
                 MenuOptionFactory.createShowAllMoviesOption(),
                 MenuOptionFactory.createCheckoutMovieByTitleOption(),
+                MenuOptionFactory.createShowUserInformationOption(),
                 MenuOptionFactory.createQuitOption()
         );
         return new Menu(menuOptions);

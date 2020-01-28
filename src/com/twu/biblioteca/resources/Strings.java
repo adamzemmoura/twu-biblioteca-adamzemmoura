@@ -13,6 +13,7 @@ public class Strings {
     public static final String ERROR_MESSAGE_INVALID_SELECTION = "Please select a valid option!";
     public static final String ERROR_MESSAGE_TOO_MANY_LOGIN_ATTEMPTS = "Too many login attempts. Goodbye!";
     public static final String CURRENT_RENTALS_HEADER = "Here is a list of the current rentals : ";
+    public static final String SHOW_USER_INFO_HEADER = "Here is your personal information : ";
 
     // menu titles
     public static final String MENU_OPTION_TITLE_SHOW_ALL_BOOKS = "Show all books";
@@ -22,6 +23,7 @@ public class Strings {
     public static final String MENU_OPTION_TITLE_SHOW_ALL_MOVIES = "Show all movies";
     public static final String MENU_OPTION_TITLE_CHECKOUT_MOVIES = "Checkout a movie";
     public static final String MENU_OPTION_TITLE_SHOW_CURRENT_RENTALS = "Show current rentals";
+    public static final String MENU_OPTION_TITLE_SHOW_YOUR_INFORMATION = "Check your personal information";
 
     // Input prompts
     public static final String MENU_SELECTION_PROMPT = "Please enter a number : ";
