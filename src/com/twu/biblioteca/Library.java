@@ -13,8 +13,11 @@ public class Library {
 
     private HashMap<UUID, AvailabilityStatus> availabilityStatusHashMap;
 
+    private List<LibraryResourceRental> rentals;
+
     private Library() {
         setInventoryToAvailable();
+        this.rentals = new ArrayList<>();
     }
 
     public void setInventoryToAvailable() {
@@ -97,10 +100,14 @@ public class Library {
     }
 
     private boolean attemptToCheckoutLibraryResource(LibraryResource resource) throws ItemNotFoundException {
-        if (AuthenticationService.sharedInstance.getCurrentUser() == null) return false;
-        UUID id = resource.getId();
+        User currentUser = AuthenticationService.sharedInstance.getCurrentUser();
+        if (currentUser == null) return false;
         if ( itemIsNotAvailable(resource) ) return false;
-        availabilityStatusHashMap.put(id, AvailabilityStatus.UNAVAILABLE);
+        availabilityStatusHashMap.put(resource.getId(), AvailabilityStatus.UNAVAILABLE);
+
+        LibraryResourceRental rental = new LibraryResourceRental(currentUser, resource);
+        this.rentals.add(rental);
+
         return true;
     }
 
@@ -112,5 +119,9 @@ public class Library {
     private boolean itemIsAvailable(LibraryResource resource) {
         AvailabilityStatus status = availabilityStatusHashMap.get(resource.getId());
         return status == AvailabilityStatus.AVAILABLE;
+    }
+
+    public List<LibraryResourceRental> getAllRentals() {
+        return this.rentals;
     }
 }

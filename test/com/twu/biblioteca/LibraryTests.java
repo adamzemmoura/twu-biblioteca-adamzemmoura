@@ -19,11 +19,13 @@ public class LibraryTests {
 
     private Library library;
     private AuthenticationService authenticationService;
+    private User testUser;
 
     @Before
     public void setUp() {
         library = Library.sharedInstance;
         authenticationService = AuthenticationService.sharedInstance;
+        testUser = TestData.users.get(0);
         loginTestUserToAuthService();
     }
 
@@ -35,7 +37,7 @@ public class LibraryTests {
 
     private void loginTestUserToAuthService() {
         try {
-            authenticationService.attemptLogin("111-1111", "secret");
+            authenticationService.attemptLogin(testUser.getLibraryNumber(), "secret");
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
@@ -132,7 +134,7 @@ public class LibraryTests {
     }
 
     @Test
-    public void checkingOutABookShouldFailIfNoUserLoggedIntoAuthenticationService() throws Exception {
+    public void checkingOutALibraryResourceShouldFailIfNoUserLoggedIntoAuthenticationService() throws Exception {
         authenticationService.logout();
         LibraryResource book = TestData.books.get(0);
         LibraryResource movie = TestData.movies.get(0);
@@ -143,4 +145,23 @@ public class LibraryTests {
         assertThat(checkedOutBook, is(false));
         assertThat(checkedOutMovie, is(false));
     }
+
+    // Library Resource Tests
+    @Test
+    public void whenAUserChecksOutALibraryResourcesLibraryResourceRentalAddedToLibrary() throws Exception {
+        LibraryResource movie = TestData.movies.get(0);
+        LibraryResource book = TestData.books.get(0);
+        library.attemptToCheckOutMovieByTitle(movie.getTitle());
+        library.attemptToCheckOutBookByTitle(book.getTitle());
+
+        List<LibraryResourceRental> rentals = library.getAllRentals();
+
+        assertThat(rentals.size(), is(2));
+    }
+
+    // when a user checks a library resource back in, the corresponding LibraryRentalResource is removed from the Library
+
+    // can retrieve a list of of Library resource rentals
+
+    // can retrieve a list of LibraryResourceRental which takes a User and returns just their rentals
 }
